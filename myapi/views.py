@@ -5,13 +5,13 @@ from rest_framework.response import Response
 from rest_framework.decorators import action
 from rest_framework.authentication import TokenAuthentication
 from django.http import JsonResponse
-# from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly, AllowAny
+from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly, AllowAny
 from rest_framework import permissions
 from myapi.permissions import IsOwnerOrReadOnly
 from django.contrib.auth.models import User
 
 
-from .serializers import UserSerializer, BlogSerializer
+from .serializers import UserSerializer, BlogSerializer, RegisterSerializer
 from .models import Blog
 
 # Create your views here.
@@ -27,4 +27,9 @@ class BlogViewSet(viewsets.ModelViewSet):
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    permission_classes = [AllowAny, ]
     
+class RegisterViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = RegisterSerializer
+    permission_classes = [AllowAny, ]
