@@ -1,0 +1,30 @@
+from django.shortcuts import render
+
+from rest_framework import viewsets, status
+from rest_framework.response import Response
+from rest_framework.decorators import action
+from rest_framework.authentication import TokenAuthentication
+from django.http import JsonResponse
+# from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly, AllowAny
+from rest_framework import permissions
+from myapi.permissions import IsOwnerOrReadOnly
+from django.contrib.auth.models import User
+
+
+from .serializers import UserSerializer, BlogSerializer
+from .models import Blog
+
+# Create your views here.
+
+class BlogViewSet(viewsets.ModelViewSet):
+    queryset = Blog.objects.all()
+    serializer_class = BlogSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    
