@@ -12,7 +12,7 @@ from django.contrib.auth.models import User
 
 
 from .serializers import UserSerializer, BlogSerializer, RegisterSerializer
-from .models import Blog
+from .models import Blog, UserProfile
 
 # Create your views here.
 
@@ -30,6 +30,6 @@ class UserViewSet(viewsets.ModelViewSet):
     permission_classes = [AllowAny, ]
     
 class RegisterViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()
+    queryset = UserProfile.objects.all()
     serializer_class = RegisterSerializer
     permission_classes = [AllowAny, ]
