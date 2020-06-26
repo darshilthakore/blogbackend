@@ -25,6 +25,7 @@ from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
 from rest_framework.authentication import TokenAuthentication
 
+# custom auth token which returns a token after login is successful
 class CustomAuthToken(ObtainAuthToken):
     authentication_classes = (TokenAuthentication, )
     def post(self, request, *args, **kwargs):
@@ -44,6 +45,7 @@ urlpatterns = [
     path('api/', include('myapi.urls')),
     path('auth/', CustomAuthToken.as_view()),
 ]
+
 
 urlpatterns += [
     path('api-auth/', include('rest_framework.urls')),
