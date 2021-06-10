@@ -1,6 +1,6 @@
 cryptography==2.8
 cycler==0.10.0
-Django==2.0.12
+Django==2.2.24
 django-cors-headers==3.2.1
 djangorestframework==3.11.0
 eventlet==0.25.1
